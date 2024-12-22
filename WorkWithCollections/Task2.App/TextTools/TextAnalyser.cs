@@ -20,6 +20,10 @@ internal class TextAnalyser
         // разделители
         char[] delimiters = [' ', '\r', '\n', '.', ',', '!', '?', ':', ';', '-', '–', '«', '»', '…', '(', ')', '[', ']'];
 
+        // убираем символы пунктуации по подсказке к заданию
+        var noPunctuationText = new string(text.Where(c => !char.IsPunctuation(c)).ToArray());
+        text = noPunctuationText;
+
         // разбиваем текст на слова
         if (!string.IsNullOrWhiteSpace(text))
             _words = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
